@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 // Setting Constants
 const USERS_URL = "http://localhost:3000/api/v1/users";
+const ITEMS_URL = "http://localhost:3000/api/v1/items";
 const MILLENNIALS_URL = "http://localhost:3000/api/v1/millennials";
 
 class App extends React.Component {
@@ -10,13 +11,15 @@ class App extends React.Component {
     super();
     this.state = {
       users: [],
-      millennials: []
+      millennials: [],
+      items: []
     }
   }
 
   componentDidMount() {
     this.fetchUsers();
     this.fetchMillennials();
+    this.fetchItems();
   }
 
   // Fetch all users, called from componentDidMount
@@ -33,6 +36,12 @@ class App extends React.Component {
     fetch(MILLENNIALS_URL)
     .then(resp => resp.json())
     .then(data => this.setState({ millennials: data }))
+  }
+
+  fetchItems() {
+    fetch(ITEMS_URL)
+    .then(resp => resp.json())
+    .then(data => this.setState({ items: data }))
   }
 
   render() {
@@ -54,6 +63,17 @@ class App extends React.Component {
                 Thirst: {millennial.thirst} (higher the thirstier?)<br/>
                 Avatar: {millennial.avatar} (need to figure out)<br/>
                 Belongs to: {millennial.user.username}
+              </li>
+            )
+          })}
+        </ul>
+        <h3>Some Items</h3>
+        <ul>
+          {this.state.items.map(item => {
+            return (
+              <li>
+                Name: {item.name}<br/>
+                Value: {item.value}
               </li>
             )
           })}
