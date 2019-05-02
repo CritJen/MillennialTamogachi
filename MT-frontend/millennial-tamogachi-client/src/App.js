@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import MillennialContainer from './containers/MillennialContainer'
 // Setting Constants
 const USERS_URL = "http://localhost:3000/api/v1/users";
 const ITEMS_URL = "http://localhost:3000/api/v1/items";
@@ -10,16 +11,17 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      users: [],
-      millennials: [],
-      items: []
+      currentUser: null,
+      items: [],
+      userLoaded: false,
+      itemsLoaded: false
     }
   }
 
   componentDidMount() {
     this.fetchUsers();
-    this.fetchMillennials();
     this.fetchItems();
+
   }
 
   // Fetch all users, called from componentDidMount
@@ -27,58 +29,49 @@ class App extends React.Component {
   fetchUsers() {
     fetch(USERS_URL)
     .then(resp => resp.json())
-    .then(data => this.setState({ users: data }))
-  }
-
-  // Fetch all millenials, called from componentDidMount
-  // Will want to filter to only get millennials for single user
-  fetchMillennials() {
-    fetch(MILLENNIALS_URL)
-    .then(resp => resp.json())
-    .then(data => this.setState({ millennials: data }))
+    .then(data => {
+      this.setState({
+        currentUser: data[0],
+        userLoaded: true
+      })
+    })
   }
 
   fetchItems() {
     fetch(ITEMS_URL)
     .then(resp => resp.json())
-    .then(data => this.setState({ items: data }))
+    .then(data => {
+      this.setState({
+        items: data,
+        itemsLoaded: true
+      })
+    })
   }
 
   render() {
+    const { userLoaded, itemsLoaded } = this.state
+
     return (
-      <div>
-        <h1>Millennials!</h1>
-        <h3>List of Users</h3>
-        <ul>
-          {this.state.users.map(user => {
-            return <li>{user.username}</li>
-          })}
-        </ul>
-        <h3>List of Millennials</h3>
-        <ul>
-          {this.state.millennials.map(millennial => {
-            return (
-              <li>
-                Name: {millennial.name}<br/>
-                Thirst: {millennial.thirst} (higher the thirstier?)<br/>
-                Avatar: {millennial.avatar} (need to figure out)<br/>
-                Belongs to: {millennial.user.username}
-              </li>
-            )
-          })}
-        </ul>
-        <h3>Some Items</h3>
-        <ul>
-          {this.state.items.map(item => {
-            return (
-              <li>
-                Name: {item.name}<br/>
-                Value: {item.value}
-              </li>
-            )
-          })}
-        </ul>
-      </div>
+      <>
+        {userLoaded && itemsLoaded ?
+        <div>
+          <h1>Current User</h1>
+          {this.state.currentUser.username}
+          <ul>
+            {this.state.items.map(item => {
+              return (
+                <li>
+                  Name: {item.name}<br/>
+                  Value: {item.value}
+                </li>
+              )
+            })}
+          </ul>
+          <MillennialContainer millenial={this.state.currentUser.millennials[0]}/>
+        </div>
+        :
+        <div></div>}
+      </>
     );
   }
 
