@@ -63,7 +63,7 @@ class App extends React.Component {
       <>
         {userLoaded && itemsLoaded ? (
           <div>
-            <LoginContainer updateUser={this.updateUser} />
+            <LoginContainer setUser={this.setUser} />
             <h1>Current User</h1>
             {this.state.currentUser.username}
             <ul>
