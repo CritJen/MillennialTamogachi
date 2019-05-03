@@ -1,23 +1,15 @@
 import React from "react";
 import ItemContainer from "./ItemContainer";
-import { Button } from 'semantic-ui-react';
-
+import { Button } from "semantic-ui-react";
 
 class MillennialContainer extends React.Component {
-
   constructor(props) {
     super(props);
     // Checks to see if user has millennial
     // Sets state accordingly
-    if (this.props.millennial) {
-      this.state = {
-        thirst: this.props.millenial.thirst
-      };
-    } else {
-      this.state = {
-        thirst: null
-      }
-    }
+    this.state = {
+      thirst: this.props.millennial.thirst
+    };
   }
 
   // Starts timer on thirst once loaded
@@ -52,45 +44,35 @@ class MillennialContainer extends React.Component {
   };
 
   // Rendered when user does NOT have a millennial
-  noMillennials() {
-    return (
-        <Button circular animated='fade'>
-          <Button.Content visible>Add a Millennial</Button.Content>
-          <Button.Content hidden>Now!</Button.Content>
-        </Button>
-    )
-  }
+  // noMillennials() {
+  //   return (
+  // <Button circular animated="fade" onClick={this.togglemillennialForm}>
+  //   <Button.Content visible>Add a Millennial</Button.Content>
+  //   <Button.Content hidden>Now!</Button.Content>
+  // </Button>
+  // );
+  // }
 
   render() {
-    if (this.props.millenial) {
-      const { name, thirst } = this.props.millenial;
+    if (this.props.millennial) {
+      const { name, thirst } = this.props.millennial;
     }
 
     return (
       <>
-        {this.props.millenial ?
+        {this.props.millennial.name ? (
           <h1>You have a millennial!</h1>
-        :
+        ) : (
           <>
-            <h2>You have no millennials!</h2>
-            {this.noMillennials()}
+            {/* <h2>You have no millennials!</h2>
+            // {this.noMillennials()} */}
           </>
-        }
-
-
-        {/*
-        <h1>Millennial Container!</h1>
-        {name}
-        <br />
-        {thirst}
-        <br />
-        <h1>{this.state.thirst}</h1>
-        <ItemContainer useItem={this.useItem} />
-        <button onClick={this.makeThirsty}> Super Thirst!</button>
-        */}
+        )}
       </>
     );
   }
 }
+
+MillennialContainer.defaultProps = { millennial: {} };
 
 export default MillennialContainer;
