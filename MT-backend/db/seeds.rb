@@ -15,22 +15,21 @@ yutaro = User.create(
 mil1 = Millennial.create(
   name: "@Dotcom",
   thirst: 10,
-
-  gender: "Male",
-  user: jen
+  avatar: 1,
+  user: jen,
 )
 
 mil2 = Millennial.create(
   name: "@Dev",
   thirst: 10,
-  gender: "Male",
+  avatar: 2,
   user: adrienne
 )
 
 mil3 = Millennial.create(
   name: "@Github",
   thirst: 10,
-  gender: "Female",
+  avatar: 3,
   user: yutaro
 )
 

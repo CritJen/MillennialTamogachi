@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2019_05_02_231459) do
     t.bigint "user_id"
     t.string "name"
     t.integer "thirst"
-    t.string "gender"
+    t.integer "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_millennials_on_user_id"
