@@ -52,20 +52,17 @@ class App extends React.Component {
   };
 
   render() {
-
-    const { loggedIn, items } = this.state;
+    const { loggedIn, items, currentUser } = this.state;
 
     return (
       <>
         {loggedIn ? (
-          <Header user={this.state.currentUser} logout={this.logout} />
+          <div>
+            <Header user={currentUser} logout={this.logout} />
 
-            <MillennialContainer
-              millenial={currentUser.millennials[0]}
-              currentUser={currentUser}
-            />
-
-            <FormContainer currentUser={this.state.currentUser} />
+            <MillennialContainer currentUser={currentUser} />
+            <FormContainer currentUser={currentUser} />
+          </div>
         ) : (
           <div>
             <LoginContainer setUser={this.setUser} />
