@@ -2,27 +2,28 @@ import React from "react";
 import "./App.css";
 import MillennialContainer from "./containers/MillennialContainer";
 import LoginContainer from "./containers/LoginContainer";
+import FormContainer from './containers/FormContainer'
+
 
 // Setting Constants
 const USERS_URL = "http://localhost:4000/api/v1/users";
-const ITEMS_URL = "http://localhost:4000/api/v1/items";
 const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials";
 
+
 class App extends React.Component {
-  // User will probably be set to single user on login
+
   constructor() {
     super();
     this.state = {
       currentUser: null,
       items: [],
-      userLoaded: false,
-      itemsLoaded: false
+      loggedIn: false,
+      userLoaded: false
     };
   }
 
   componentDidMount() {
     this.fetchUsers();
-    this.fetchItems();
   }
 
   // Sets the current username to the input value of login form
@@ -43,47 +44,32 @@ class App extends React.Component {
           userLoaded: true
         });
       });
-  }
 
-  fetchItems() {
-    fetch(ITEMS_URL)
-      .then(resp => resp.json())
-      .then(data => {
-        this.setState({
-          items: data,
-          itemsLoaded: true
-        });
-      });
-  }
 
   render() {
-    const { userLoaded, itemsLoaded } = this.state;
+    const { userLoaded, items } = this.state;
 
     return (
       <>
-        {userLoaded && itemsLoaded ? (
+        {userLoaded ? (
           <div>
-            <LoginContainer setUser={this.setUser} />
+                     <LoginContainer setUser={this.setUser} />
+
             <h1>Current User</h1>
             {this.state.currentUser.username}
-            <ul>
-              {this.state.items.map(item => {
-                return (
-                  <li>
-                    Name: {item.name}
-                    <br />
-                    Value: {item.value}
-                  </li>
-                );
-              })}
-            </ul>
+
             <MillennialContainer
               millenial={this.state.currentUser.millennials[0]}
             />
+      
+          <FormContainer
+            currentUser={this.state.currentUser}
+          />
           </div>
         ) : (
           <div />
         )}
+
       </>
     );
   }

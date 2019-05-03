@@ -15,36 +15,43 @@ yutaro = User.create(
 mil1 = Millennial.create(
   name: "@Dotcom",
   thirst: 10,
-  avatar: 1,
+
+  gender: "Male",
   user: jen
 )
 
 mil2 = Millennial.create(
   name: "@Dev",
   thirst: 10,
-  avatar: 2,
+  gender: "Male",
   user: adrienne
 )
 
 mil3 = Millennial.create(
   name: "@Github",
   thirst: 10,
-  avatar: 3,
+  gender: "Female",
   user: yutaro
 )
 
 ###### ITEMS ######
 lacroix = Item.create(
   name: "La Croix",
-  value: 5
+  value: 5,
+  category: 'thirst',
+  img: 'FaCookie'
 )
 
 coconut = Item.create(
   name: "Coconut Water",
-  value: 10
+  value: 10,
+  category: 'thirst',
+  img: 'FaGlassWhiskey'
 )
 
 latte = Item.create(
   name: "Soy Milk Latte",
-  value: 1
+  value: 1,
+  category: 'thirst',
+  img:  'FaMugHot'
 )
