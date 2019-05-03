@@ -4,16 +4,21 @@ import MillennialContainer from "./containers/MillennialContainer";
 // Setting Constants
 const USERS_URL = "http://localhost:4000/api/v1/users";
 const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials";
+import FormContainer from './containers/FormContainer'
+
+
 
 class App extends React.Component {
-  // User will probably be set to single user on login
+
   constructor() {
     super();
     this.state = {
       currentUser: null,
       items: [],
+      loggedIn: false,
       userLoaded: false
     };
+
   }
 
   componentDidMount() {
@@ -46,10 +51,15 @@ class App extends React.Component {
             <MillennialContainer
               millenial={this.state.currentUser.millennials[0]}
             />
+      
+          <FormContainer
+            currentUser={this.state.currentUser}
+          />
           </div>
         ) : (
           <div />
         )}
+
       </>
     );
   }
