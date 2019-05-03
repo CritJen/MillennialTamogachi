@@ -3,6 +3,7 @@ import "./App.css";
 import MillennialContainer from "./containers/MillennialContainer";
 import LoginContainer from "./containers/LoginContainer";
 import FormContainer from "./containers/FormContainer";
+import Header from "./component/Header";
 
 // Setting Constants
 const USERS_URL = "http://localhost:4000/api/v1/users";
@@ -43,6 +44,11 @@ class App extends React.Component {
       });
   }
 
+  logout = () => {
+    debugger;
+    this.setState({ currentUser: null, userLoaded: false });
+  };
+
   render() {
     const { userLoaded, items } = this.state;
 
@@ -51,9 +57,7 @@ class App extends React.Component {
         {userLoaded ? (
           <div>
             <LoginContainer setUser={this.setUser} />
-
-            <h1>Current User</h1>
-            {this.state.currentUser.username}
+            <Header user={this.state.currentUser} logout={this.logout} />
 
             <MillennialContainer
               millenial={this.state.currentUser.millennials[0]}
