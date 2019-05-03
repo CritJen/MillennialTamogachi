@@ -1,6 +1,17 @@
 import React, { Component } from "react";
+import { Button, Checkbox, Form } from "semantic-ui-react";
 
 const USERS_URL = "http://localhost:4000/api/v1/users";
+
+const divStyle = {
+  margin: "auto",
+  width: "30%",
+  padding: "250px 0"
+};
+
+const fontStyle = {
+  textAlign: "center"
+};
 
 class LoginContainer extends Component {
   constructor(props) {
@@ -31,22 +42,33 @@ class LoginContainer extends Component {
       .then(resp => resp.json())
       .then(data => {
         this.props.setUser(data);
+        console.log(data);
       });
   };
 
   render() {
     return (
       <>
-        <form onSubmit={this.submitLogin}>
-          <label>Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={this.state.username}
-            onChange={this.logIn}
-          />
-          <button type="submit">Submit</button>
-        </form>
+        <div style={divStyle}>
+          <h1 style={fontStyle}>Millennial Tamogachi</h1>
+          <br />
+          <br />
+          <br />
+          <Form onSubmit={this.submitLogin} size={"huge"}>
+            <Form.Field>
+              <label>Username:</label>
+              <input
+                type="text"
+                id="username"
+                value={this.state.username}
+                onChange={this.logIn}
+              />
+            </Form.Field>
+            <Button type="submit" size="large" circular>
+              Submit
+            </Button>
+          </Form>
+        </div>
       </>
     );
   }

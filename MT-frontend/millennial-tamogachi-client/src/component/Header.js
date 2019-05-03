@@ -13,9 +13,14 @@ export default class Header extends Component {
     let user = this.props.user.username;
     return (
       <Menu size="small">
-        <Menu.Item name={user} active={activeItem === "home"} onClick={null} />
+        <Menu.Item
+          name="Millennial Tamogachi (logo)"
+          active={activeItem === "home"}
+          onClick={null}
+        />
 
         <Menu.Menu position="right">
+          <Menu.Item onClick={null}>{user}</Menu.Item>
           <Menu.Item>
             <Button onClick={this.props.logout} primary>
               Logout
