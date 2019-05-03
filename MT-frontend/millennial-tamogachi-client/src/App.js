@@ -17,7 +17,8 @@ class App extends React.Component {
       items: [],
       loggedIn: false,
       userLoaded: false,
-      hasMillennial: false
+      hasMillennial: false,
+      millennialForm: false
     };
   }
 
