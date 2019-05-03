@@ -19,29 +19,32 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.fetchUsers();
-  }
+  // componentDidMount() {
+  // this.fetchUsers();
+  // }
 
   // Sets the current username to the input value of login form
   setUser = user => {
     this.setState({
-      username: user
+      username: user.username,
+      currentUser: user,
+      loggedIn: true
     });
   };
 
   // Fetch all users, called from componentDidMount
   // Probably won't need this(?) Just proof-of-concept
-  fetchUsers() {
-    fetch(USERS_URL)
-      .then(resp => resp.json())
-      .then(data => {
-        this.setState({
-          currentUser: data[3],
-          userLoaded: true
-        });
-      });
-  }
+
+  // fetchUsers() {
+  //   fetch(USERS_URL)
+  //     .then(resp => resp.json())
+  //     .then(data => {
+  //       this.setState({
+  //         currentUser: data[0],
+  //         userLoaded: true
+  //       });
+  //     });
+  // }
 
   logout = () => {
     debugger;
@@ -49,14 +52,13 @@ class App extends React.Component {
   };
 
   render() {
-    const { userLoaded, items, currentUser } = this.state;
+
+    const { loggedIn, items } = this.state;
 
     return (
       <>
-        {userLoaded ? (
-          <div>
-            <LoginContainer setUser={this.setUser} />
-            <Header user={this.state.currentUser} logout={this.logout} />
+        {loggedIn ? (
+          <Header user={this.state.currentUser} logout={this.logout} />
 
             <MillennialContainer
               millenial={currentUser.millennials[0]}
@@ -64,9 +66,10 @@ class App extends React.Component {
             />
 
             <FormContainer currentUser={this.state.currentUser} />
-          </div>
         ) : (
-          <div />
+          <div>
+            <LoginContainer setUser={this.setUser} />
+          </div>
         )}
       </>
     );

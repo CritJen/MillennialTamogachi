@@ -19,7 +19,7 @@ class LoginContainer extends Component {
   submitLogin = ev => {
     ev.preventDefault();
     let currentUser = { username: this.state.username };
-    console.log(currentUser);
+
     fetch(USERS_URL, {
       method: "POST",
       headers: {
@@ -30,7 +30,7 @@ class LoginContainer extends Component {
     })
       .then(resp => resp.json())
       .then(data => {
-        console.log(data);
+        this.props.setUser(data);
       });
   };
 
@@ -45,12 +45,7 @@ class LoginContainer extends Component {
             value={this.state.username}
             onChange={this.logIn}
           />
-          <button
-            type="submit"
-            onClick={() => this.props.setUser(this.state.username)}
-          >
-            Submit
-          </button>
+          <button type="submit">Submit</button>
         </form>
       </>
     );
