@@ -16,8 +16,6 @@ class LoginContainer extends Component {
     });
   };
 
-  // function
-
   submitLogin = ev => {
     ev.preventDefault();
     let currentUser = { username: this.state.username };
@@ -49,7 +47,7 @@ class LoginContainer extends Component {
           />
           <button
             type="submit"
-            onClick={() => this.props.updateUser(this.state.username)}
+            onClick={() => this.props.setUser(this.state.username)}
           >
             Submit
           </button>

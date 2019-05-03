@@ -25,7 +25,8 @@ class App extends React.Component {
     this.fetchItems();
   }
 
-  updateUser = user => {
+  // Sets the current username to the input value of login form
+  setUser = user => {
     this.setState({
       username: user
     });
