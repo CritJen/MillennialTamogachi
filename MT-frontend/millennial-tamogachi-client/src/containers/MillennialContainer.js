@@ -1,19 +1,17 @@
 import React from "react";
-import Item from "../component/Item";
+import ItemContainer from "./ItemContainer";
 const ITEMS_URL = "http://localhost:4000/api/v1/items";
 
 class MillennialContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      thirst: this.props.millenial.thirst,
-      items: null
+      thirst: this.props.millenial.thirst
     };
   }
 
   componentDidMount() {
     this.intervalId = setInterval(this.timer, 10000);
-    this.fetchItems();
   }
 
   componentWillUnmount() {
@@ -37,16 +35,6 @@ class MillennialContainer extends React.Component {
       : this.setState({ [category]: 10 });
   };
 
-  fetchItems() {
-    fetch(ITEMS_URL)
-      .then(resp => resp.json())
-      .then(data => {
-        this.setState({
-          items: data
-        });
-      });
-  }
-
   makeThirsty = () => {
     this.setState({ thirst: 1 });
   };
@@ -62,10 +50,7 @@ class MillennialContainer extends React.Component {
         {thirst}
         <br />
         <h1>{this.state.thirst}</h1>
-        {this.state.items &&
-          this.state.items.map(item => {
-            return <Item item={item} useItem={this.useItem} />;
-          })}
+        <ItemContainer useItem={this.useItem} />
         <button onClick={this.makeThirsty}> Super Thirst!</button>
       </div>
     );
