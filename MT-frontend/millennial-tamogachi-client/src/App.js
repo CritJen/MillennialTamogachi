@@ -47,8 +47,7 @@ class App extends React.Component {
   // }
 
   logout = () => {
-    debugger;
-    this.setState({ currentUser: null, userLoaded: false });
+    this.setState({ currentUser: null, userLoaded: false, loggedIn: false });
   };
 
   render() {
