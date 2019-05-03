@@ -1,11 +1,13 @@
 import React from "react";
 import "./App.css";
 import MillennialContainer from "./containers/MillennialContainer";
+import LoginContainer from "./containers/LoginContainer";
+import FormContainer from './containers/FormContainer'
+
+
 // Setting Constants
 const USERS_URL = "http://localhost:4000/api/v1/users";
 const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials";
-import FormContainer from './containers/FormContainer'
-
 
 
 class App extends React.Component {
@@ -18,12 +20,18 @@ class App extends React.Component {
       loggedIn: false,
       userLoaded: false
     };
-
   }
 
   componentDidMount() {
     this.fetchUsers();
   }
+
+  // Sets the current username to the input value of login form
+  setUser = user => {
+    this.setState({
+      username: user
+    });
+  };
 
   // Fetch all users, called from componentDidMount
   // Probably won't need this(?) Just proof-of-concept
@@ -36,7 +44,7 @@ class App extends React.Component {
           userLoaded: true
         });
       });
-  }
+
 
   render() {
     const { userLoaded, items } = this.state;
@@ -45,6 +53,8 @@ class App extends React.Component {
       <>
         {userLoaded ? (
           <div>
+                     <LoginContainer setUser={this.setUser} />
+
             <h1>Current User</h1>
             {this.state.currentUser.username}
 
