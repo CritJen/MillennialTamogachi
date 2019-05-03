@@ -4,7 +4,7 @@ class CreateMillennials < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true
       t.string :name
       t.integer :thirst
-      t.integer :avatar
+      t.string :gender
 
       t.timestamps
     end
