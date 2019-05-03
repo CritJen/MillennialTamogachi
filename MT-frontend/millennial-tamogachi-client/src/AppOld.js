@@ -18,7 +18,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchUsers();
-    // this.fetchMillennials();
+    this.fetchMillennials();
     this.fetchItems();
   }
 
