@@ -82,7 +82,7 @@ class App extends React.Component {
               <FormContainer closeModal={this.closeModal} />
             )}
             <MillennialContainer
-              millenial={currentUser.millennials[0]}
+              millennial={currentUser.millennials[0]}
               currentUser={currentUser}
             />
           </div>
