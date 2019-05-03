@@ -1,7 +1,7 @@
 import React from 'react';
 import man from '../assets/avatar/hipster-man.svg';
 import woman from '../assets/avatar/hipster-woman.svg';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, Modal } from 'semantic-ui-react';
 // Setting Constants
 const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials"
 
@@ -56,7 +56,7 @@ class FormContainer extends React.Component {
 
   render() {
     return (
-      <>
+      <Modal>
         <Form onSubmit={this.postMillennial} className="ui form">
           {/* Name */}
           <Form.Field>
@@ -70,18 +70,7 @@ class FormContainer extends React.Component {
               required
             />
           </Form.Field>
-          {/* Avatar
-          <Form.Field>
-            <input
-              type="number"
-              name="avatar"
-              placeholder="Avatar#"
-              value={this.state.avatar}
-              onChange={this.handleChange}
-              required
-            />
-          </Form.Field>*/}
-          {/* Submit */}
+          {/* Gender */}
           <Form.Group inline>
             <label>Gender</label>
             <Form.Radio
@@ -97,6 +86,7 @@ class FormContainer extends React.Component {
               onChange={this.handleRadioChange}
             />
           </Form.Group>
+          {/* Submit */}
           <Button type="submit">
             Create Your Millennial
           </Button>
@@ -107,7 +97,7 @@ class FormContainer extends React.Component {
         :
         <img src={woman} alt="woman" />
         }
-      </>
+      </Modal>
     )
   }
 

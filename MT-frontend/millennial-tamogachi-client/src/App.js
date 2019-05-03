@@ -7,7 +7,6 @@ import Header from "./component/Header";
 
 // Setting Constants
 const USERS_URL = "http://localhost:4000/api/v1/users";
-const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials";
 
 class App extends React.Component {
   constructor() {
@@ -38,7 +37,7 @@ class App extends React.Component {
       .then(resp => resp.json())
       .then(data => {
         this.setState({
-          currentUser: data[0],
+          currentUser: data[3],
           userLoaded: true
         });
       });
@@ -50,7 +49,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { userLoaded, items } = this.state;
+    const { userLoaded, items, currentUser } = this.state;
 
     return (
       <>
@@ -60,7 +59,8 @@ class App extends React.Component {
             <Header user={this.state.currentUser} logout={this.logout} />
 
             <MillennialContainer
-              millenial={this.state.currentUser.millennials[0]}
+              millenial={currentUser.millennials[0]}
+              currentUser={currentUser}
             />
 
             <FormContainer currentUser={this.state.currentUser} />

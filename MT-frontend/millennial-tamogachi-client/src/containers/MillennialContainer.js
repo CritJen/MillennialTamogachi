@@ -1,20 +1,31 @@
 import React from "react";
 import ItemContainer from "./ItemContainer";
+import { Button } from 'semantic-ui-react';
 
-const ITEMS_URL = "http://localhost:4000/api/v1/items";
 
 class MillennialContainer extends React.Component {
+
   constructor(props) {
     super(props);
-    this.state = {
-      thirst: this.props.millenial.thirst
-    };
+    // Checks to see if user has millennial
+    // Sets state accordingly
+    if (this.props.millennial) {
+      this.state = {
+        thirst: this.props.millenial.thirst
+      };
+    } else {
+      this.state = {
+        thirst: null
+      }
+    }
   }
 
+  // Starts timer on thirst once loaded
   componentDidMount() {
     this.intervalId = setInterval(this.timer, 10000);
   }
 
+  // Stops timer when closing window/reload
   componentWillUnmount() {
     clearInterval(this.intervalId);
   }
@@ -40,11 +51,34 @@ class MillennialContainer extends React.Component {
     this.setState({ thirst: 1 });
   };
 
+  // Rendered when user does NOT have a millennial
+  noMillennials() {
+    return (
+        <Button circular animated='fade'>
+          <Button.Content visible>Add a Millennial</Button.Content>
+          <Button.Content hidden>Now!</Button.Content>
+        </Button>
+    )
+  }
+
   render() {
-    const { name, thirst } = this.props.millenial;
+    if (this.props.millenial) {
+      const { name, thirst } = this.props.millenial;
+    }
 
     return (
-      <div>
+      <>
+        {this.props.millenial ?
+          <h1>You have a millennial!</h1>
+        :
+          <>
+            <h2>You have no millennials!</h2>
+            {this.noMillennials()}
+          </>
+        }
+
+
+        {/*
         <h1>Millennial Container!</h1>
         {name}
         <br />
@@ -53,7 +87,8 @@ class MillennialContainer extends React.Component {
         <h1>{this.state.thirst}</h1>
         <ItemContainer useItem={this.useItem} />
         <button onClick={this.makeThirsty}> Super Thirst!</button>
-      </div>
+        */}
+      </>
     );
   }
 }
