@@ -2,16 +2,13 @@ import React from "react";
 import "./App.css";
 import MillennialContainer from "./containers/MillennialContainer";
 import LoginContainer from "./containers/LoginContainer";
-import FormContainer from './containers/FormContainer'
-
+import FormContainer from "./containers/FormContainer";
 
 // Setting Constants
 const USERS_URL = "http://localhost:4000/api/v1/users";
 const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials";
 
-
 class App extends React.Component {
-
   constructor() {
     super();
     this.state = {
@@ -44,7 +41,7 @@ class App extends React.Component {
           userLoaded: true
         });
       });
-
+  }
 
   render() {
     const { userLoaded, items } = this.state;
@@ -53,7 +50,7 @@ class App extends React.Component {
       <>
         {userLoaded ? (
           <div>
-                     <LoginContainer setUser={this.setUser} />
+            <LoginContainer setUser={this.setUser} />
 
             <h1>Current User</h1>
             {this.state.currentUser.username}
@@ -61,15 +58,12 @@ class App extends React.Component {
             <MillennialContainer
               millenial={this.state.currentUser.millennials[0]}
             />
-      
-          <FormContainer
-            currentUser={this.state.currentUser}
-          />
+
+            <FormContainer currentUser={this.state.currentUser} />
           </div>
         ) : (
           <div />
         )}
-
       </>
     );
   }
