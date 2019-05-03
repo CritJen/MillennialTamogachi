@@ -11,12 +11,17 @@ class FormContainer extends React.Component {
     super();
     this.state = {
       name: '',
-      avatar: ''
+      avatar: '',
+      gender: 'Male'
     };
   }
 
   handleChange = (ev) => {
     this.setState({ [ev.target.name]: ev.target.value })
+  }
+
+  handleRadioChange = (ev) => {
+    this.setState({ gender: ev.target.textContent })
   }
 
   // Helper method used in the postMillennial method
@@ -77,12 +82,31 @@ class FormContainer extends React.Component {
             />
           </Form.Field>
           {/* Submit */}
+          <Form.Group inline>
+            <label>Gender</label>
+            <Form.Radio
+              label='Male'
+              value='male'
+              checked={this.state.gender === 'Male'}
+              onChange={this.handleRadioChange}
+            />
+            <Form.Radio
+              label='Female'
+              value='female'
+              checked={this.state.gender === 'Female'}
+              onChange={this.handleRadioChange}
+            />
+          </Form.Group>
           <Button type="submit">
-            Create a Millennial
+            Create Your Millennial
           </Button>
         </Form>
+        {this.state.gender === 'Male'
+        ?
         <img src={man} alt="man" />
+        :
         <img src={woman} alt="woman" />
+        }
       </>
     )
   }
