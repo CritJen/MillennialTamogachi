@@ -3,10 +3,10 @@ import "./App.css";
 import MillennialContainer from "./containers/MillennialContainer";
 import LoginContainer from "./containers/LoginContainer";
 import FormContainer from "./containers/FormContainer";
+import Header from "./component/Header";
 
 // Setting Constants
 const USERS_URL = "http://localhost:4000/api/v1/users";
-const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials";
 
 class App extends React.Component {
   constructor() {
@@ -34,6 +34,7 @@ class App extends React.Component {
 
   // Fetch all users, called from componentDidMount
   // Probably won't need this(?) Just proof-of-concept
+
   // fetchUsers() {
   //   fetch(USERS_URL)
   //     .then(resp => resp.json())
@@ -45,15 +46,26 @@ class App extends React.Component {
   //     });
   // }
 
+  logout = () => {
+    debugger;
+    this.setState({ currentUser: null, userLoaded: false });
+  };
+
   render() {
+
     const { loggedIn, items } = this.state;
 
     return (
       <>
         {loggedIn ? (
-          <MillennialContainer
-            millenial={this.state.currentUser.millennials[0]}
-          />
+          <Header user={this.state.currentUser} logout={this.logout} />
+
+            <MillennialContainer
+              millenial={currentUser.millennials[0]}
+              currentUser={currentUser}
+            />
+
+            <FormContainer currentUser={this.state.currentUser} />
         ) : (
           <div>
             <LoginContainer setUser={this.setUser} />
