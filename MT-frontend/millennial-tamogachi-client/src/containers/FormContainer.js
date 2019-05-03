@@ -11,7 +11,7 @@ class FormContainer extends React.Component {
     super();
     this.state = {
       name: '',
-      avatar: '',
+      // avatar: '',
       gender: 'Male'
     };
   }
@@ -70,7 +70,7 @@ class FormContainer extends React.Component {
               required
             />
           </Form.Field>
-          {/* Avatar */}
+          {/* Avatar
           <Form.Field>
             <input
               type="number"
@@ -80,7 +80,7 @@ class FormContainer extends React.Component {
               onChange={this.handleChange}
               required
             />
-          </Form.Field>
+          </Form.Field>*/}
           {/* Submit */}
           <Form.Group inline>
             <label>Gender</label>

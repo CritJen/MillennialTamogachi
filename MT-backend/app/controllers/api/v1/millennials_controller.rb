@@ -8,12 +8,12 @@ class Api::V1::MillennialsController < ApplicationController
   def create
     name = params[:millennial][:name]
     thirst = params[:millennial][:thirst]
-    avatar = params[:millennial][:avatar]
+    gender = params[:millennial][:gender]
     user = User.find(params[:user][:id])
     @millennial = Millennial.create({
       name: name,
       thirst: thirst,
-      avatar: avatar,
+      gender: gender,
       user: user
     })
     render json: @millennial, status: 201
