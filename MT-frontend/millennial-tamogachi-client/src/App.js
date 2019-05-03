@@ -64,7 +64,7 @@ class App extends React.Component {
             />
 
             <MillennialContainer
-              millenial={currentUser.millennials[0]}
+              millennial={currentUser.millennials[0]}
               currentUser={currentUser}
             />
 
