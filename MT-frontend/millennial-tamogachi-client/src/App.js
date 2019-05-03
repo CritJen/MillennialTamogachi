@@ -5,7 +5,6 @@ import FormContainer from './containers/FormContainer'
 // Setting Constants
 const USERS_URL = "http://localhost:4000/api/v1/users";
 const ITEMS_URL = "http://localhost:4000/api/v1/items";
-const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials";
 
 class App extends React.Component {
 

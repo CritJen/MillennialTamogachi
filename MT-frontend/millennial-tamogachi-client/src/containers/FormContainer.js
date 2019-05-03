@@ -1,5 +1,7 @@
-import React from "react";
-import avatar from '../4507.jpg';
+import React from 'react';
+import man from '../assets/avatar/hipster-man.svg';
+import woman from '../assets/avatar/hipster-woman.svg';
+import { Form, Button } from 'semantic-ui-react';
 // Setting Constants
 const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials"
 
@@ -50,32 +52,37 @@ class FormContainer extends React.Component {
   render() {
     return (
       <>
-        <form onSubmit={this.postMillennial}>
+        <Form onSubmit={this.postMillennial} className="ui form">
           {/* Name */}
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={this.state.name}
-            onChange={this.handleChange}
-            required
-          />
+          <Form.Field>
+            <input
+              type="text"
+              className="ui input"
+              name="name"
+              placeholder="Name"
+              value={this.state.name}
+              onChange={this.handleChange}
+              required
+            />
+          </Form.Field>
           {/* Avatar */}
-          <input
-            type="number"
-            name="avatar"
-            placeholder="Avatar#"
-            value={this.state.avatar}
-            onChange={this.handleChange}
-            required
-          />
+          <Form.Field>
+            <input
+              type="number"
+              name="avatar"
+              placeholder="Avatar#"
+              value={this.state.avatar}
+              onChange={this.handleChange}
+              required
+            />
+          </Form.Field>
           {/* Submit */}
-          <input
-            type="submit"
-            value="Create a Millennial"
-          />
-        </form>
-        <img src={avatar} alt='' width="800" height="auto"/>
+          <Button type="submit">
+            Create a Millennial
+          </Button>
+        </Form>
+        <img src={man} alt="man" />
+        <img src={woman} alt="woman" />
       </>
     )
   }
