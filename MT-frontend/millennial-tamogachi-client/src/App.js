@@ -1,10 +1,12 @@
-import React from 'react';
-import './App.css';
-import MillennialContainer from './containers/MillennialContainer'
+import React from "react";
+import "./App.css";
+import MillennialContainer from "./containers/MillennialContainer";
+import LoginContainer from "./containers/LoginContainer";
+
 // Setting Constants
-const USERS_URL = "http://localhost:3000/api/v1/users";
-const ITEMS_URL = "http://localhost:3000/api/v1/items";
-const MILLENNIALS_URL = "http://localhost:3000/api/v1/millennials";
+const USERS_URL = "http://localhost:4000/api/v1/users";
+const ITEMS_URL = "http://localhost:4000/api/v1/items";
+const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials";
 
 class App extends React.Component {
   // User will probably be set to single user on login
@@ -15,66 +17,75 @@ class App extends React.Component {
       items: [],
       userLoaded: false,
       itemsLoaded: false
-    }
+    };
   }
 
   componentDidMount() {
     this.fetchUsers();
     this.fetchItems();
-
   }
+
+  updateUser = user => {
+    this.setState({
+      username: user
+    });
+  };
 
   // Fetch all users, called from componentDidMount
   // Probably won't need this(?) Just proof-of-concept
   fetchUsers() {
     fetch(USERS_URL)
-    .then(resp => resp.json())
-    .then(data => {
-      this.setState({
-        currentUser: data[0],
-        userLoaded: true
-      })
-    })
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({
+          currentUser: data[0],
+          userLoaded: true
+        });
+      });
   }
 
   fetchItems() {
     fetch(ITEMS_URL)
-    .then(resp => resp.json())
-    .then(data => {
-      this.setState({
-        items: data,
-        itemsLoaded: true
-      })
-    })
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({
+          items: data,
+          itemsLoaded: true
+        });
+      });
   }
 
   render() {
-    const { userLoaded, itemsLoaded } = this.state
+    const { userLoaded, itemsLoaded } = this.state;
 
     return (
       <>
-        {userLoaded && itemsLoaded ?
-        <div>
-          <h1>Current User</h1>
-          {this.state.currentUser.username}
-          <ul>
-            {this.state.items.map(item => {
-              return (
-                <li>
-                  Name: {item.name}<br/>
-                  Value: {item.value}
-                </li>
-              )
-            })}
-          </ul>
-          <MillennialContainer millenial={this.state.currentUser.millennials[0]}/>
-        </div>
-        :
-        <div></div>}
+        {userLoaded && itemsLoaded ? (
+          <div>
+            <LoginContainer updateUser={this.updateUser} />
+            <h1>Current User</h1>
+            {this.state.currentUser.username}
+            <ul>
+              {this.state.items.map(item => {
+                return (
+                  <li>
+                    Name: {item.name}
+                    <br />
+                    Value: {item.value}
+                  </li>
+                );
+              })}
+            </ul>
+            <MillennialContainer
+              millenial={this.state.currentUser.millennials[0]}
+            />
+          </div>
+        ) : (
+          <div />
+        )}
       </>
     );
   }
-
 }
 
 export default App;
