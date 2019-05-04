@@ -9,7 +9,7 @@ class Api::V1::MillennialsController < ApplicationController
     name = params[:millennial][:name]
     thirst = params[:millennial][:thirst]
     gender = params[:millennial][:gender]
-    user = User.find(params[:username][:id])
+    user = User.find(params[:user][:id])
     @millennial = Millennial.create({
       name: name,
       thirst: thirst,

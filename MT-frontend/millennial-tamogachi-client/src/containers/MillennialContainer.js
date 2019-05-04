@@ -9,7 +9,7 @@ class MillennialContainer extends React.Component {
   render() {
     return (
       <>
-        {this.props.hasMillennial.length !== 0 ?
+        {this.props.hasMillennial ?
           <>
             <MillennialCard
               millennial={this.props.millennial}

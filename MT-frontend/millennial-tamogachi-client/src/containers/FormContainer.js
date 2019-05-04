@@ -6,11 +6,11 @@ import { Form, Button, Modal } from "semantic-ui-react";
 const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials";
 
 class FormContainer extends React.Component {
+
   constructor() {
     super();
     this.state = {
       name: "",
-      // avatar: '',
       gender: "Male"
     };
   }
@@ -35,6 +35,7 @@ class FormContainer extends React.Component {
   // Triggered by submit button
   postMillennial = ev => {
     ev.preventDefault();
+    this.props.closeModal();
     // Posting new millennial
     fetch(MILLENNIALS_URL, {
       method: "POST",
@@ -50,6 +51,8 @@ class FormContainer extends React.Component {
           name: "",
           avatar: ""
         });
+        console.log(data)
+        this.props.handleNewMillennial(data);
       });
   };
 
@@ -64,38 +67,43 @@ class FormContainer extends React.Component {
       >
         <Modal.Header>Form</Modal.Header>
         <Modal.Content>
-          <input
-            type="text"
-            className="ui input"
-            name="name"
-            placeholder="Name"
-            value={this.state.name}
-            onChange={this.handleChange}
-            required
-          />
-          {/* Gender */}
-          <Form.Group inline>
-            <label>Gender</label>
-            <Form.Radio
-              label="Male"
-              value="male"
-              checked={this.state.gender === "Male"}
-              onChange={this.handleRadioChange}
-            />
-            <Form.Radio
-              label="Female"
-              value="female"
-              checked={this.state.gender === "Female"}
-              onChange={this.handleRadioChange}
-            />
-          </Form.Group>
-          {/* Submit */}
-          <Button type="submit">Create Your Millennial</Button>
-          {this.state.gender === "Male" ? (
-            <img src={man} alt="man" />
-          ) : (
-            <img src={woman} alt="woman" />
-          )}
+          <Form onSubmit={this.postMillennial}>
+            {/* Name */}
+            <Form.Field>
+              <input
+                type="text"
+                className="ui input"
+                name="name"
+                placeholder="Name"
+                value={this.state.name}
+                onChange={this.handleChange}
+                required
+              />
+            </Form.Field>
+            {/* Gender */}
+            <Form.Group inline>
+              <label>Gender</label>
+              <Form.Radio
+                label="Male"
+                value="male"
+                checked={this.state.gender === "Male"}
+                onChange={this.handleRadioChange}
+              />
+              <Form.Radio
+                label="Female"
+                value="female"
+                checked={this.state.gender === "Female"}
+                onChange={this.handleRadioChange}
+              />
+            </Form.Group>
+            {/* Submit */}
+            <Button type="submit">Create Your Millennial</Button>
+            {this.state.gender === "Male" ? (
+              <img src={man} alt="man" />
+            ) : (
+              <img src={woman} alt="woman" />
+            )}
+          </Form>
         </Modal.Content>
       </Modal>
     );
