@@ -22,10 +22,6 @@ class App extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  // this.fetchUsers();
-  // }
-
   // Sets the current username to the input value of login form
   setUser = user => {
     this.setState({
@@ -36,19 +32,6 @@ class App extends React.Component {
     });
   };
 
-  // Fetch all users, called from componentDidMount
-  // Probably won't need this(?) Just proof-of-concept
-
-  // fetchUsers() {
-  //   fetch(USERS_URL)
-  //     .then(resp => resp.json())
-  //     .then(data => {
-  //       this.setState({
-  //         currentUser: data[0],
-  //         userLoaded: true
-  //       });
-  //     });
-  // }
   togglemillennialForm = () => {
     this.setState({ millennialForm: true });
   };
@@ -85,6 +68,7 @@ class App extends React.Component {
             <MillennialContainer
               millennial={currentUser.millennials[0]}
               currentUser={currentUser}
+              hasMillennial={hasMillennial}
             />
           </div>
         ) : (
