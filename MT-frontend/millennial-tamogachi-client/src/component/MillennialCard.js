@@ -12,6 +12,7 @@ class MillennialCard extends React.Component {
     super(props);
     // Checks to see if user has millennial
     // Sets state accordingly
+    // @JEN: How do you do default state????
     if (this.props.millennial) {
       this.state = {
         thirst: this.props.millennial.thirst
@@ -32,6 +33,8 @@ class MillennialCard extends React.Component {
     clearInterval(this.intervalId);
   }
 
+  // Decreases thirsty level by 1 until 0
+  // then stops timer
   timer = () => {
     this.setState({
       thirst: this.state.thirst - 1
@@ -41,6 +44,7 @@ class MillennialCard extends React.Component {
     }
   };
 
+  // Triggered by item click function
   useItem = (name, value, category) => {
     let currentValue = this.state[category];
     let newValue = currentValue + value;
@@ -80,9 +84,14 @@ class MillennialCard extends React.Component {
         <img src={this.pickGender()} alt="avatar" />
         <div>
           <h3>Hydration Level</h3>
-          <Progress value={this.state.thirst} total='10' progress='ratio' color={this.pickColor()} />
+          <Progress
+            value={this.state.thirst}
+            total='10'
+            progress='ratio'
+            color={this.pickColor()}
+          />
           <ItemContainer useItem={this.useItem} />
-          <button onClick={this.makeThirsty}> Super Thirst!</button>
+          {/*<button onClick={this.makeThirsty}> Super Thirst!</button>*/}
         </div>
       </div>
     )
