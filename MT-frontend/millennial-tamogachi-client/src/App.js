@@ -29,7 +29,7 @@ class App extends React.Component {
       currentUser: user,
       millennial: user.millennials[0],
       loggedIn: true,
-      hasMillennial: user.millennials.length !== 0,
+      hasMillennial: user.millennials.length !== 0
     });
   };
 
@@ -38,8 +38,8 @@ class App extends React.Component {
     this.setState({
       hasMillennial: true,
       millennial: mill
-    })
-  }
+    });
+  };
 
   togglemillennialForm = () => {
     this.setState({ millennialForm: true });
@@ -54,7 +54,13 @@ class App extends React.Component {
   };
 
   render() {
-    const { loggedIn, items, currentUser, hasMillennial, millennial } = this.state;
+    const {
+      loggedIn,
+      items,
+      currentUser,
+      hasMillennial,
+      millennial
+    } = this.state;
 
     return (
       <>
