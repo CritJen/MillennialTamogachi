@@ -90,7 +90,9 @@ class FormContainer extends React.Component {
             />
           </Form.Group>
           {/* Submit */}
-          <Button type="submit">Create Your Millennial</Button>
+          <Button type="submit" onClick={this.postMillennial}>
+            Create Your Millennial
+          </Button>
           {this.state.gender === "Male" ? (
             <img src={man} alt="man" />
           ) : (
