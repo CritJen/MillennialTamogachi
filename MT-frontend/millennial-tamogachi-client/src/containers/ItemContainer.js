@@ -1,5 +1,5 @@
 import React from "react";
-import Item from "../component/Item";
+import ItemCard from "../component/Item";
 const ITEMS_URL = "http://localhost:4000/api/v1/items";
 
 class ItemContainer extends React.Component {
@@ -36,8 +36,8 @@ class ItemContainer extends React.Component {
     return (
       <div>
         {this.state.items &&
-          this.state.items.map(item => {
-            return <Item item={item} useItem={this.props.useItem} />;
+          this.state.items.map((item, index) => {
+            return <ItemCard item={item} key={index} useItem={this.props.useItem} />;
           })}
       </div>
     );

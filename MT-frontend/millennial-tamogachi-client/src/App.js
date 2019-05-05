@@ -14,6 +14,7 @@ class App extends React.Component {
     super();
     this.state = {
       currentUser: null,
+      millennial: null,
       items: [],
       loggedIn: false,
       userLoaded: false,
@@ -22,33 +23,24 @@ class App extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  // this.fetchUsers();
-  // }
-
   // Sets the current username to the input value of login form
   setUser = user => {
     this.setState({
-      username: user.username,
       currentUser: user,
+      millennial: user.millennials[0],
       loggedIn: true,
-      hasMillennial: user.millennials
+      hasMillennial: user.millennials.length !== 0,
     });
   };
 
-  // Fetch all users, called from componentDidMount
-  // Probably won't need this(?) Just proof-of-concept
+  // Set hasMillennial to true based on CREATE
+  handleNewMillennial = mill => {
+    this.setState({
+      hasMillennial: true,
+      millennial: mill
+    })
+  }
 
-  // fetchUsers() {
-  //   fetch(USERS_URL)
-  //     .then(resp => resp.json())
-  //     .then(data => {
-  //       this.setState({
-  //         currentUser: data[0],
-  //         userLoaded: true
-  //       });
-  //     });
-  // }
   togglemillennialForm = () => {
     this.setState({ millennialForm: true });
   };
@@ -62,14 +54,14 @@ class App extends React.Component {
   };
 
   render() {
-    const { loggedIn, items, currentUser, hasMillennial } = this.state;
+    const { loggedIn, items, currentUser, hasMillennial, millennial } = this.state;
 
     return (
       <>
         {loggedIn ? (
           <div>
             <Header user={this.state.currentUser} logout={this.logout} />
-            {hasMillennial.length === 0 && (
+            {!hasMillennial && (
               <Button
                 circular
                 animated="fade"
@@ -80,11 +72,16 @@ class App extends React.Component {
               </Button>
             )}
             {this.state.millennialForm && (
-              <FormContainer closeModal={this.closeModal} />
+              <FormContainer
+                closeModal={this.closeModal}
+                currentUser={currentUser}
+                handleNewMillennial={this.handleNewMillennial}
+              />
             )}
             <MillennialContainer
-              millennial={currentUser.millennials[0]}
+              millennial={millennial}
               currentUser={currentUser}
+              hasMillennial={hasMillennial}
             />
           </div>
         ) : (

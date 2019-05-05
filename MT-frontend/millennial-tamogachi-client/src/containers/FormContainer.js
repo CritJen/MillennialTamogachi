@@ -6,11 +6,11 @@ import { Form, Button, Modal } from "semantic-ui-react";
 const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials";
 
 class FormContainer extends React.Component {
+
   constructor() {
     super();
     this.state = {
       name: "",
-      // avatar: '',
       gender: "Male"
     };
   }
@@ -35,6 +35,7 @@ class FormContainer extends React.Component {
   // Triggered by submit button
   postMillennial = ev => {
     ev.preventDefault();
+    this.props.closeModal();
     // Posting new millennial
     fetch(MILLENNIALS_URL, {
       method: "POST",
@@ -50,6 +51,8 @@ class FormContainer extends React.Component {
           name: "",
           avatar: ""
         });
+        console.log(data)
+        this.props.handleNewMillennial(data);
       });
   };
 
@@ -98,6 +101,7 @@ class FormContainer extends React.Component {
           ) : (
             <img src={woman} alt="woman" />
           )}
+
         </Modal.Content>
       </Modal>
     );
