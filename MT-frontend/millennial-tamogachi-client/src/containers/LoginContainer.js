@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Button, Checkbox, Form } from "semantic-ui-react";
+import Tamagachi from "../assets/tamagochi/RaimbowTamagachi.jpg";
+import styles from "../styles/LoginContainer.module.css";
 
 const USERS_URL = "http://localhost:4000/api/v1/users";
 
@@ -49,14 +51,24 @@ class LoginContainer extends Component {
   render() {
     return (
       <>
-        <div style={divStyle}>
-          <h1 style={fontStyle}>Millennial Tamogachi</h1>
+        <div
+          className={styles.background}
+          style={divStyle}
+          style={{ backgroundImage: `url(${Tamagachi})` }}
+        >
+          <h1 className={styles.title} style={fontStyle}>
+            Millennial
+          </h1>
           <br />
           <br />
           <br />
-          <Form onSubmit={this.submitLogin} size={"huge"}>
+          <Form
+            onSubmit={this.submitLogin}
+            size={"huge"}
+            className={styles.form}
+          >
             <Form.Field>
-              <label>Username:</label>
+              <label className={styles.label}>Username:</label>
               <input
                 type="text"
                 id="username"
@@ -64,7 +76,7 @@ class LoginContainer extends Component {
                 onChange={this.logIn}
               />
             </Form.Field>
-            <Button type="submit" size="large" circular>
+            <Button color="teal" type="submit" size="large" circular>
               Submit
             </Button>
           </Form>

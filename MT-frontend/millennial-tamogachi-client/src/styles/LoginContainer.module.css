@@ -1,0 +1,28 @@
+.background {
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 785px;
+}
+
+.form {
+  position: relative;
+  top: 13%;
+  margin: 0 auto;
+  left: 11px;
+  width: 218px;
+  background-color: #bda4cc;
+  height: 210px;
+  padding: 10px;
+}
+
+.label {
+  color: #54b0af !important;
+  font-size: 1.3em !important;
+}
+
+.title {
+  font-size: 7.3em;
+  color: #d89fc2 !important;
+  font-family: "Perpetula";
+  margin-top: 85px !important;
+}
