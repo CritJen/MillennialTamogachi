@@ -2,11 +2,23 @@ import React, { Component } from "react";
 import { Label, Image } from 'semantic-ui-react';
 // Import vectors
 import cocoWater from '../assets/items/thirst/coconutwater.jpg';
+import coffee from '../assets/items/thirst/coffee.svg';
+import lacroix from '../assets/items/thirst/lacroix.svg';
+
+const DRINKS = {
+  "La Croix": lacroix,
+  "Coconut Water": cocoWater,
+  "Soy Milk Latte": coffee
+}
 
 class ItemCard extends Component {
 
   constructor(props) {
     super(props);
+  }
+
+  getImg(name) {
+    return DRINKS[name]
   }
 
   render() {
@@ -20,7 +32,7 @@ class ItemCard extends Component {
           onClick={item => useItem(name, value, category)}
           size='large'
         >
-          <Image avatar src={cocoWater} alt="drink" />
+          <Image avatar src={this.getImg(name)} alt="drink" />
            {name} :  {value}
         </Label>
       </>
