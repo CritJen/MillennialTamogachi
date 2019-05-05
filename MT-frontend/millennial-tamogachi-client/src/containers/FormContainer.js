@@ -67,43 +67,41 @@ class FormContainer extends React.Component {
       >
         <Modal.Header>Form</Modal.Header>
         <Modal.Content>
-          <Form onSubmit={this.postMillennial}>
-            {/* Name */}
-            <Form.Field>
-              <input
-                type="text"
-                className="ui input"
-                name="name"
-                placeholder="Name"
-                value={this.state.name}
-                onChange={this.handleChange}
-                required
-              />
-            </Form.Field>
-            {/* Gender */}
-            <Form.Group inline>
-              <label>Gender</label>
-              <Form.Radio
-                label="Male"
-                value="male"
-                checked={this.state.gender === "Male"}
-                onChange={this.handleRadioChange}
-              />
-              <Form.Radio
-                label="Female"
-                value="female"
-                checked={this.state.gender === "Female"}
-                onChange={this.handleRadioChange}
-              />
-            </Form.Group>
-            {/* Submit */}
-            <Button type="submit">Create Your Millennial</Button>
-            {this.state.gender === "Male" ? (
-              <img src={man} alt="man" />
-            ) : (
-              <img src={woman} alt="woman" />
-            )}
-          </Form>
+          <input
+            type="text"
+            className="ui input"
+            name="name"
+            placeholder="Name"
+            value={this.state.name}
+            onChange={this.handleChange}
+            required
+          />
+          {/* Gender */}
+          <Form.Group inline>
+            <label>Gender</label>
+            <Form.Radio
+              label="Male"
+              value="male"
+              checked={this.state.gender === "Male"}
+              onChange={this.handleRadioChange}
+            />
+            <Form.Radio
+              label="Female"
+              value="female"
+              checked={this.state.gender === "Female"}
+              onChange={this.handleRadioChange}
+            />
+          </Form.Group>
+          {/* Submit */}
+          <Button type="submit" onClick={this.postMillennial}>
+            Create Your Millennial
+          </Button>
+          {this.state.gender === "Male" ? (
+            <img src={man} alt="man" />
+          ) : (
+            <img src={woman} alt="woman" />
+          )}
+
         </Modal.Content>
       </Modal>
     );
