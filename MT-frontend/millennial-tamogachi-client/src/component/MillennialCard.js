@@ -92,6 +92,9 @@ class MillennialCard extends React.Component {
           />
           <ItemContainer useItem={this.useItem} />
           {/*<button onClick={this.makeThirsty}> Super Thirst!</button>*/}
+          <button onClick={() => this.props.deleteMillennial(this.props.millennial)}>
+            Delete
+          </button>
         </div>
       </div>
     )

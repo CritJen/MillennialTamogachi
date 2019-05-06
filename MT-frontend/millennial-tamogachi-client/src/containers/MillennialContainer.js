@@ -2,6 +2,7 @@ import React from "react";
 import MillennialCard from "../component/MillennialCard";
 
 class MillennialContainer extends React.Component {
+
   constructor(props) {
     super(props);
   }
@@ -13,6 +14,7 @@ class MillennialContainer extends React.Component {
           <>
             <MillennialCard
               millennial={this.props.millennial}
+              deleteMillennial={this.props.deleteMillennial}
             />
           </>
         :

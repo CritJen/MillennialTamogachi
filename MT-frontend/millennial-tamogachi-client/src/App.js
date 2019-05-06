@@ -8,6 +8,7 @@ import { Button } from "semantic-ui-react";
 
 // Setting Constants
 const USERS_URL = "http://localhost:4000/api/v1/users";
+const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials";
 
 class App extends React.Component {
   constructor() {
@@ -15,9 +16,7 @@ class App extends React.Component {
     this.state = {
       currentUser: null,
       millennial: null,
-      items: [],
       loggedIn: false,
-      userLoaded: false,
       hasMillennial: false,
       millennialForm: false
     };
@@ -41,12 +40,25 @@ class App extends React.Component {
     })
   }
 
+  // Deletes millennial, triggered from MillennialCard
+  deleteMillennial = millennial => {
+    fetch(MILLENNIALS_URL + '/' + millennial.id, {
+      method: 'DELETE'
+    })
+    .then(resp => {
+      this.setState({
+        millennial: null,
+        hasMillennial: false
+      })
+    })
+  }
+
   togglemillennialForm = () => {
     this.setState({ millennialForm: true });
   };
 
   logout = () => {
-    this.setState({ currentUser: null, userLoaded: false, loggedIn: false });
+    this.setState({ currentUser: null, loggedIn: false });
   };
 
   closeModal = () => {
@@ -82,6 +94,9 @@ class App extends React.Component {
               millennial={millennial}
               currentUser={currentUser}
               hasMillennial={hasMillennial}
+              togglemillennialForm={this.togglemillennialForm}
+              closeModal={this.closeModal}
+              deleteMillennial={this.deleteMillennial}
             />
           </div>
         ) : (
