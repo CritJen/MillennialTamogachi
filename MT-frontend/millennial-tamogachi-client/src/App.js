@@ -15,7 +15,7 @@ class App extends React.Component {
     super();
     this.state = {
       currentUser: null,
-      millennial: null,
+      millennials: [],
       loggedIn: false,
       hasMillennial: false,
       millennialForm: false
@@ -26,7 +26,7 @@ class App extends React.Component {
   setUser = user => {
     this.setState({
       currentUser: user,
-      millennial: user.millennials[0],
+      millennials: user.millennials,
       loggedIn: true,
       hasMillennial: user.millennials.length !== 0
     });
@@ -36,7 +36,7 @@ class App extends React.Component {
   handleNewMillennial = mill => {
     this.setState({
       hasMillennial: true,
-      millennial: mill
+      millennials: [...this.state.millennials, mill]
     });
   };
 
@@ -46,11 +46,20 @@ class App extends React.Component {
       method: 'DELETE'
     })
     .then(resp => {
+      let newMillennials = this.removeMillennialFromState(millennial);
       this.setState({
-        millennial: null,
-        hasMillennial: false
+        millennials: newMillennials,
+        hasMillennial: newMillennials.length !== 0
       })
     })
+  }
+
+  // Goes through millennials state and removes millennial
+  removeMillennialFromState = millennial => {
+    let newMillennials = this.state.millennials.filter(mill => {
+      return mill !== millennial
+    })
+    return newMillennials;
   }
 
   togglemillennialForm = () => {
@@ -71,7 +80,7 @@ class App extends React.Component {
       items,
       currentUser,
       hasMillennial,
-      millennial
+      millennials
     } = this.state;
 
     return (
@@ -79,16 +88,16 @@ class App extends React.Component {
         {loggedIn ? (
           <div>
             <Header user={this.state.currentUser} logout={this.logout} />
-            {!hasMillennial && (
-              <Button
-                circular
-                animated="fade"
-                onClick={this.togglemillennialForm}
-              >
-                <Button.Content visible>Add a Millennial</Button.Content>
-                <Button.Content hidden>Now!</Button.Content>
-              </Button>
-            )}
+            {/* }{!hasMillennial && ( */}
+            <Button
+              circular
+              animated="fade"
+              onClick={this.togglemillennialForm}
+            >
+              <Button.Content visible>Add a Millennial</Button.Content>
+              <Button.Content hidden>Now!</Button.Content>
+            </Button>
+            {/* )} */}
             {this.state.millennialForm && (
               <FormContainer
                 closeModal={this.closeModal}
@@ -97,7 +106,7 @@ class App extends React.Component {
               />
             )}
             <MillennialContainer
-              millennial={millennial}
+              millennials={millennials}
               currentUser={currentUser}
               hasMillennial={hasMillennial}
               togglemillennialForm={this.togglemillennialForm}

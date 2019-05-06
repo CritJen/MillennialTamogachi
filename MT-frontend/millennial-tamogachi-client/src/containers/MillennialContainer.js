@@ -12,10 +12,13 @@ class MillennialContainer extends React.Component {
       <>
         {this.props.hasMillennial ?
           <>
-            <MillennialCard
-              millennial={this.props.millennial}
-              deleteMillennial={this.props.deleteMillennial}
-            />
+            {this.props.millennials.map((mill, index) => {
+              return <MillennialCard
+                        key={index}
+                        millennial={mill}
+                        deleteMillennial={this.props.deleteMillennial}
+              />
+            })}
           </>
         :
           <>
