@@ -10,7 +10,6 @@ import { Button } from "semantic-ui-react";
 const USERS_URL = "http://localhost:4000/api/v1/users";
 const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials";
 
-
 class App extends React.Component {
   constructor() {
     super();
@@ -37,31 +36,30 @@ class App extends React.Component {
   handleNewMillennial = mill => {
     this.setState({
       hasMillennial: true,
-      millennials: [...this.state.millennials, mill]
+      millennials: [mill]
     });
   };
 
   // Deletes millennial, triggered from MillennialCard
   deleteMillennial = millennial => {
-    fetch(MILLENNIALS_URL + '/' + millennial.id, {
-      method: 'DELETE'
-    })
-    .then(resp => {
+    fetch(MILLENNIALS_URL + "/" + millennial.id, {
+      method: "DELETE"
+    }).then(resp => {
       let newMillennials = this.removeMillennialFromState(millennial);
       this.setState({
         millennials: newMillennials,
         hasMillennial: newMillennials.length !== 0
-      })
-    })
-  }
+      });
+    });
+  };
 
   // Goes through millennials state and removes millennial
   removeMillennialFromState = millennial => {
     let newMillennials = this.state.millennials.filter(mill => {
-      return mill !== millennial
-    })
+      return mill !== millennial;
+    });
     return newMillennials;
-  }
+  };
 
   togglemillennialForm = () => {
     this.setState({ millennialForm: true });
@@ -76,7 +74,6 @@ class App extends React.Component {
   };
 
   render() {
-
     const {
       loggedIn,
       items,
@@ -85,22 +82,21 @@ class App extends React.Component {
       millennials
     } = this.state;
 
-
     return (
       <>
         {loggedIn ? (
           <div>
             <Header user={this.state.currentUser} logout={this.logout} />
-            {/* }{!hasMillennial && ( */}
-            <Button
-              circular
-              animated="fade"
-              onClick={this.togglemillennialForm}
-            >
-              <Button.Content visible>Add a Millennial</Button.Content>
-              <Button.Content hidden>Now!</Button.Content>
-            </Button>
-            {/* )} */}
+            {!hasMillennial && (
+              <Button
+                circular
+                animated="fade"
+                onClick={this.togglemillennialForm}
+              >
+                <Button.Content visible>Add a Millennial</Button.Content>
+                <Button.Content hidden>Now!</Button.Content>
+              </Button>
+            )}
             {this.state.millennialForm && (
               <FormContainer
                 closeModal={this.closeModal}
