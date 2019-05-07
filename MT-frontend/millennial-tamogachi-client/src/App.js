@@ -10,6 +10,7 @@ import { Button } from "semantic-ui-react";
 const USERS_URL = "http://localhost:4000/api/v1/users";
 const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials";
 
+
 class App extends React.Component {
   constructor() {
     super();
@@ -75,6 +76,7 @@ class App extends React.Component {
   };
 
   render() {
+    
     const {
       loggedIn,
       items,
@@ -82,6 +84,7 @@ class App extends React.Component {
       hasMillennial,
       millennials
     } = this.state;
+
 
     return (
       <>
@@ -103,6 +106,7 @@ class App extends React.Component {
                 closeModal={this.closeModal}
                 currentUser={currentUser}
                 handleNewMillennial={this.handleNewMillennial}
+                millennial={millennial}
               />
             )}
             <MillennialContainer

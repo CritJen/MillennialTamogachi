@@ -1,4 +1,5 @@
 class Api::V1::MillennialsController < ApplicationController
+  before_action :set_millennial, only: [ :update, :destroy]
 
   def index
     @millennials = Millennial.all
@@ -20,12 +21,25 @@ class Api::V1::MillennialsController < ApplicationController
   end
 
   def update
+    @millennial.update( millennial_params)
+
+    render json: @millennial, status: 201
   end
 
   def destroy
     @millennial = Millennial.find(params[:id])
     @millennial.destroy
     render "Deleted Successfully", status: 204
+  end
+
+  private
+
+  def set_millennial
+    @millennial = Millennial.find(params[:id])
+  end
+
+  def millennial_params
+    params.require(:millennial).permit!
   end
 
 end
