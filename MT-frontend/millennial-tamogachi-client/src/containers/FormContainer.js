@@ -40,7 +40,6 @@ class FormContainer extends React.Component {
     const { id } = this.state;
     // Conditionally posting new millennial
     if (id === null) {
-      debugger;
       fetch(MILLENNIALS_URL, {
         method: "POST",
         headers: {
@@ -53,16 +52,16 @@ class FormContainer extends React.Component {
           // Resetting state, so form is reset
           this.setState({
             name: "",
-            avatar: ""
+            gender: "Male",
+            id: null
           });
           console.log(data);
           this.props.handleNewMillennial(data);
         });
     } else {
-      debugger;
       console.log(MILLENNIALS_URL + "/" + id);
       fetch(MILLENNIALS_URL + "/" + id, {
-        method: "Patch",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json"
         },
@@ -136,6 +135,6 @@ class FormContainer extends React.Component {
 }
 
 FormContainer.defaultProps = {
-  millennial: { name: "name", gender: "Male", id: null }
+  millennial: { name: "", gender: "Male", id: null }
 };
 export default FormContainer;

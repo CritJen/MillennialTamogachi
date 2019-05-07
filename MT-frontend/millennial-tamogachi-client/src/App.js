@@ -76,7 +76,7 @@ class App extends React.Component {
   };
 
   render() {
-    
+
     const {
       loggedIn,
       items,
@@ -106,7 +106,7 @@ class App extends React.Component {
                 closeModal={this.closeModal}
                 currentUser={currentUser}
                 handleNewMillennial={this.handleNewMillennial}
-                millennial={millennial}
+                millennial={millennials[0]}
               />
             )}
             <MillennialContainer

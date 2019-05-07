@@ -4,7 +4,8 @@ import ItemContainer from "../containers/ItemContainer";
 // Import vectors
 import man from '../assets/avatar/hipster-man.svg';
 import woman from '../assets/avatar/hipster-woman.svg';
-
+// Setting Constants
+const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials";
 
 class MillennialCard extends React.Component {
 
@@ -26,11 +27,24 @@ class MillennialCard extends React.Component {
   // Starts timer on thirst once loaded
   componentDidMount() {
     this.intervalId = setInterval(this.timer, 1000);
+    window.addEventListener('unload', this.saveState)
   }
 
   // Stops timer when closing window/reload
   componentWillUnmount() {
     clearInterval(this.intervalId);
+    window.addEventListener('unload', this.saveState)
+  }
+
+  // Save current state on page reload / window close
+  saveState = () => {
+    fetch(MILLENNIALS_URL + '/' + this.props.millennial.id, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    })
   }
 
   // Decreases thirsty level by 1 until 0
