@@ -27,6 +27,9 @@ class Api::V1::MillennialsController < ApplicationController
   end
 
   def destroy
+    @millennial = Millennial.find(params[:id])
+    @millennial.destroy
+    render "Deleted Successfully", status: 204
   end
 
   private
