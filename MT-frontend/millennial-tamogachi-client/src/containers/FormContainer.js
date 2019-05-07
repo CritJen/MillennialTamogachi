@@ -7,11 +7,12 @@ import styles from "../styles/FormContainer.module.css";
 const MILLENNIALS_URL = "http://localhost:4000/api/v1/millennials";
 
 class FormContainer extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      name: "",
-      gender: "Male"
+      name: this.props.millennial.name,
+      gender: this.props.millennial.gender,
+      id: this.props.millennial.id
     };
   }
 
@@ -36,24 +37,48 @@ class FormContainer extends React.Component {
   postMillennial = ev => {
     ev.preventDefault();
     this.props.closeModal();
-    // Posting new millennial
-    fetch(MILLENNIALS_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(this.makeFetchBody())
-    })
-      .then(resp => resp.json())
-      .then(data => {
-        // Resetting state, so form is reset
-        this.setState({
-          name: "",
-          avatar: ""
+    const { id } = this.state;
+    // Conditionally posting new millennial
+    if (id === null) {
+      debugger;
+      fetch(MILLENNIALS_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.makeFetchBody())
+      })
+        .then(resp => resp.json())
+        .then(data => {
+          // Resetting state, so form is reset
+          this.setState({
+            name: "",
+            avatar: ""
+          });
+          console.log(data);
+          this.props.handleNewMillennial(data);
         });
-        console.log(data);
-        this.props.handleNewMillennial(data);
-      });
+    } else {
+      debugger;
+      console.log(MILLENNIALS_URL + "/" + id);
+      fetch(MILLENNIALS_URL + "/" + id, {
+        method: "Patch",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.makeFetchBody())
+      })
+        .then(resp => resp.json())
+        .then(data => {
+          // Resetting state, so form is reset
+          this.setState({
+            name: "",
+            avatar: ""
+          });
+          console.log(data);
+          this.props.handleNewMillennial(data);
+        });
+    }
   };
 
   render() {
@@ -110,4 +135,7 @@ class FormContainer extends React.Component {
   }
 }
 
+FormContainer.defaultProps = {
+  millennial: { name: "name", gender: "Male", id: null }
+};
 export default FormContainer;

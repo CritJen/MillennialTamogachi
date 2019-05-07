@@ -7,7 +7,6 @@ import Header from "./component/Header";
 import { Button } from "semantic-ui-react";
 
 // Setting Constants
-const USERS_URL = "http://localhost:4000/api/v1/users";
 
 class App extends React.Component {
   constructor() {
@@ -54,13 +53,7 @@ class App extends React.Component {
   };
 
   render() {
-    const {
-      loggedIn,
-      items,
-      currentUser,
-      hasMillennial,
-      millennial
-    } = this.state;
+    const { loggedIn, currentUser, hasMillennial, millennial } = this.state;
 
     return (
       <>
@@ -82,12 +75,14 @@ class App extends React.Component {
                 closeModal={this.closeModal}
                 currentUser={currentUser}
                 handleNewMillennial={this.handleNewMillennial}
+                millennial={millennial}
               />
             )}
             <MillennialContainer
               millennial={millennial}
               currentUser={currentUser}
               hasMillennial={hasMillennial}
+              togglemillennialForm={this.togglemillennialForm}
             />
           </div>
         ) : (

@@ -1,26 +1,24 @@
 import React from "react";
 import MillennialCard from "../component/MillennialCard";
+import { Button } from "semantic-ui-react";
 
 class MillennialContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+  editMillennial = () => {};
   render() {
+    const { millennial, hasMillennial, togglemillennialForm } = this.props;
     return (
       <>
-        {this.props.hasMillennial ?
+        {hasMillennial ? (
           <>
-            <MillennialCard
-              millennial={this.props.millennial}
-            />
+            <MillennialCard millennial={millennial} />
+            <Button onClick={() => togglemillennialForm()}>Edit</Button>
           </>
-        :
+        ) : (
           <>
             {/* <h2>You have no millennials!</h2>
             // {this.noMillennials()} */}
           </>
-        }
+        )}
       </>
     );
   }
