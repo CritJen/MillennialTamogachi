@@ -21,8 +21,9 @@
 }
 
 .title {
+  font-family: "VT323", monospace;
   font-size: 7.3em;
   color: #d89fc2 !important;
-  font-family: "Perpetula";
+  /* font-family: "Perpetula"; */
   margin-top: 85px !important;
 }
