@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import "./App.css";
 import MillennialContainer from "./containers/MillennialContainer";
 import LoginContainer from "./containers/LoginContainer";
@@ -84,41 +85,63 @@ class App extends React.Component {
 
     return (
       <>
-        {loggedIn ? (
+        <Router>
           <div>
-            <Header user={this.state.currentUser} logout={this.logout} />
-            {!hasMillennial && (
-              <Button
-                circular
-                animated="fade"
-                onClick={this.togglemillennialForm}
-              >
-                <Button.Content visible>Add a Millennial</Button.Content>
-                <Button.Content hidden>Now!</Button.Content>
-              </Button>
+            {loggedIn ? (
+              <>
+                <Route path="/login" render={() => <Redirect to="/" />} />
+                <Route
+                  exact
+                  path="/"
+                  render={() => (
+                    <div>
+                      <Header
+                        user={this.state.currentUser}
+                        logout={this.logout}
+                      />
+                      {!hasMillennial && (
+                        <Button
+                          circular
+                          animated="fade"
+                          onClick={this.togglemillennialForm}
+                        >
+                          <Button.Content visible>
+                            Add a Millennial
+                          </Button.Content>
+                          <Button.Content hidden>Now!</Button.Content>
+                        </Button>
+                      )}
+                      {this.state.millennialForm && (
+                        <FormContainer
+                          closeModal={this.closeModal}
+                          currentUser={currentUser}
+                          handleNewMillennial={this.handleNewMillennial}
+                          millennial={millennials[0]}
+                        />
+                      )}
+                      <MillennialContainer
+                        millennials={millennials}
+                        currentUser={currentUser}
+                        hasMillennial={hasMillennial}
+                        togglemillennialForm={this.togglemillennialForm}
+                        closeModal={this.closeModal}
+                        deleteMillennial={this.deleteMillennial}
+                      />
+                    </div>
+                  )}
+                />
+              </>
+            ) : (
+              <div>
+                <Route
+                  exact
+                  path="/login"
+                  render={() => <LoginContainer setUser={this.setUser} />}
+                />
+              </div>
             )}
-            {this.state.millennialForm && (
-              <FormContainer
-                closeModal={this.closeModal}
-                currentUser={currentUser}
-                handleNewMillennial={this.handleNewMillennial}
-                millennial={millennials[0]}
-              />
-            )}
-            <MillennialContainer
-              millennials={millennials}
-              currentUser={currentUser}
-              hasMillennial={hasMillennial}
-              togglemillennialForm={this.togglemillennialForm}
-              closeModal={this.closeModal}
-              deleteMillennial={this.deleteMillennial}
-            />
           </div>
-        ) : (
-          <div>
-            <LoginContainer setUser={this.setUser} />
-          </div>
-        )}
+        </Router>
       </>
     );
   }
