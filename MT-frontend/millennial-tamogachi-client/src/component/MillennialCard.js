@@ -1,5 +1,5 @@
 import React from "react";
-import { Progress } from "semantic-ui-react";
+import { Progress, Button } from "semantic-ui-react";
 import ItemContainer from "../containers/ItemContainer";
 // Import vectors
 import man from "../assets/avatar/hipster-man.svg";
@@ -121,11 +121,12 @@ class MillennialCard extends React.Component {
           <ItemContainer useItem={this.useItem} />
           {/*<button onClick={this.makeThirsty}> Super Thirst!</button>*/}
         </div>
-        <button
+        <br />
+        <Button
           onClick={() => this.props.deleteMillennial(this.props.millennial)}
         >
           Delete
-        </button>
+        </Button>
       </div>
     );
   }

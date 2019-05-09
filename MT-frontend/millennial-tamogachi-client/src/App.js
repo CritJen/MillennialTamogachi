@@ -85,63 +85,43 @@ class App extends React.Component {
 
     return (
       <>
-        <Router>
-          <div>
-            {loggedIn ? (
-              <>
-                <Route path="/login" render={() => <Redirect to="/" />} />
-                <Route
-                  exact
-                  path="/"
-                  render={() => (
-                    <div>
-                      <Header
-                        user={this.state.currentUser}
-                        logout={this.logout}
-                      />
-                      {!hasMillennial && (
-                        <Button
-                          circular
-                          animated="fade"
-                          onClick={this.togglemillennialForm}
-                        >
-                          <Button.Content visible>
-                            Add a Millennial
-                          </Button.Content>
-                          <Button.Content hidden>Now!</Button.Content>
-                        </Button>
-                      )}
-                      {this.state.millennialForm && (
-                        <FormContainer
-                          closeModal={this.closeModal}
-                          currentUser={currentUser}
-                          handleNewMillennial={this.handleNewMillennial}
-                          millennial={millennials[0]}
-                        />
-                      )}
-                      <MillennialContainer
-                        millennials={millennials}
-                        currentUser={currentUser}
-                        hasMillennial={hasMillennial}
-                        togglemillennialForm={this.togglemillennialForm}
-                        closeModal={this.closeModal}
-                        deleteMillennial={this.deleteMillennial}
-                      />
-                    </div>
-                  )}
+        <div>
+          {loggedIn ? (
+            <div>
+              <Header user={this.state.currentUser} logout={this.logout} />
+              {!hasMillennial && (
+                <Button
+                  circular
+                  animated="fade"
+                  onClick={this.togglemillennialForm}
+                >
+                  <Button.Content visible>Add a Millennial</Button.Content>
+                  <Button.Content hidden>Now!</Button.Content>
+                </Button>
+              )}
+              {this.state.millennialForm && (
+                <FormContainer
+                  closeModal={this.closeModal}
+                  currentUser={currentUser}
+                  handleNewMillennial={this.handleNewMillennial}
+                  millennial={millennials[0]}
                 />
-              </>
-            ) : (
-              <div>
-                <Route
-                  exact
-                  path="/login"
-                  render={() => <LoginContainer setUser={this.setUser} />}
-                />
-              </div>
-            )}
-          </div>
-        </Router>
+              )}
+              <MillennialContainer
+                millennials={millennials}
+                currentUser={currentUser}
+                hasMillennial={hasMillennial}
+                togglemillennialForm={this.togglemillennialForm}
+                closeModal={this.closeModal}
+                deleteMillennial={this.deleteMillennial}
+              />
+            </div>
+          ) : (
+            <div>
+              <LoginContainer setUser={this.setUser} />
+            </div>
+          )}
+        </div>
       </>
     );
   }
