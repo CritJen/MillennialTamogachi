@@ -14,7 +14,7 @@ export default class Header extends Component {
     return (
       <Menu size="small">
         <Menu.Item
-          name="Millennial Tamogachi (logo)"
+          name="Millennial Tamogachi"
           active={activeItem === "home"}
           onClick={null}
         />
