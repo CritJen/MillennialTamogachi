@@ -14,5 +14,10 @@ npm start
 
 ## Built With
 
-React - The web framework used\
-NPM - Dependency Management
+[React](https://reactjs.org/) - The web framework used\
+[NPM](https://www.npmjs.com/) - Dependency Management
+
+## Authors
++ Yutaro Suji
++ Adrienne Miller
++ Jennifer Clark
