@@ -1,24 +1,21 @@
-# README
+# Millennial Tamagachi Backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Get Started
++ Clone the repository
++ Install the gem dependencies
+```
+bundle install
+```
++ Run the local server on port 4000
+```
+rails s -p 4000
+```
 
-Things you may want to cover:
+## Built With
+[Rails](https://rubyonrails.org/) - MVC framework built in [Ruby](https://www.ruby-lang.org/en/)\
+[PostgreSQL](https://www.postgresql.org/) - Open source relational database server
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Authors
++ Jennifer Clark
++ Adrienne Miller 
++ Yutaro Suji
